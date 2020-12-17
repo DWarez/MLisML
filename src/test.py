@@ -1,13 +1,3 @@
-# MLisML - Machine Learning is Matrix muLtiplication
-
-## Purpose
-This repository is exclusively used for the realization of the project for the Machine Learning exam @UniPi for the academic year 2020/21.
-
-## Usage
-Just like Keras, but a lot uglier.
-
-Example:
-```
 from neural_networks import NeuralNetwork
 from layers import InputLayer, DenseLayer, OutputLayer
 import dataset as ds
@@ -29,15 +19,3 @@ my_model.compile(857, 600, 0.1/1524, None, 0.001, 0.01, "mean_squared_error")
 
 # Fit the modelusing the previously defined dataset
 my_model.fit(data.train_data_patterns, data.train_data_targets)
-```
-
-
-## How to contribute
-Don't.
-
-## Contributors
-Team DeepMai:
-
-[Dario Salvati](d.salvati2@studenti.unipi.it)
-
-[Andrea Zuppolini](a.zuppoolini@studenti.unipi.it)
