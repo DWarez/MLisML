@@ -27,7 +27,7 @@ my_model.add(OutputLayer(2, fanin = 15))
 # Setup the model's hyperparameters and training parameters
 my_model.compile(857, 600, 0.1/1524, None, 0.001, 0.01, "mean_squared_error")
 
-# Fit the modelusing the previously defined dataset
+# Fit the model using the previously defined dataset
 my_model.fit(data.train_data_patterns, data.train_data_targets)
 ```
 
