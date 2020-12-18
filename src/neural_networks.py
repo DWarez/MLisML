@@ -68,16 +68,22 @@ class NeuralNetwork:
 
             batch_size (int):
                 Size of the batch used for training
+
             epochs (int):
                 Number of epochs used for training
+
             learning_rate (float): 
                 Learning rate value
+
             optimizer (string): 
                 Optimizer used
+
             regularization (float): 
                 Coefficient used for the regularization term
+
             momentum (float): 
                 Coefficient used for the momentum term
+                
             loss (string): 
                 Loss function used during the training of the model
         """

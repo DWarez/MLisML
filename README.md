@@ -10,10 +10,10 @@ Example:
 ```
 from neural_networks import NeuralNetwork
 from layers import InputLayer, DenseLayer, OutputLayer
-import dataset as ds
+from dataset import MLCupDataset
 
 # Create a MLCupDataset object containing MLCup patterns and targets
-data = ds.MLCupDataset()
+data = MLCupDataset()
 
 # The framework also contains MONKS
 # data = ds.MonksDataset()
