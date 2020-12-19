@@ -281,7 +281,7 @@ class NeuralNetwork:
         loss = []
         i = 0
 
-        for _ in progressbar.progressbar(range(self.epochs)):
+        for _ in range(self.epochs):
             for i in range(math.floor(len(patterns)/self.batch_size)):
                 loss.append(self._backpropagation(patterns[i * self.batch_size : (i + 1) * self.batch_size], targets[i * self.batch_size : (i + 1) * self.batch_size]))
             
