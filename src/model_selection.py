@@ -13,7 +13,7 @@ data = MLCupDataset()
 learning_rates = [0.8, 0.5, 0.3, 0.1, 0.08, 0.05, 0.03, 0.01]
 epochs = [300, 600]
 regularizations = [0.008, 0.005, 0.003, 0.001]
-momentums = [0.3, 0.1, 0.08, 0.05, 0.03, 0.01]
+momentums = [0.8, 0.5, 0.3, 0.1, 0.08, 0.05, 0.03, 0.01]
 
 k = 10
 size = 857
