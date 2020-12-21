@@ -52,14 +52,13 @@ def tanh(x):
     '''
         Tanh function f(x) = (e^2x - 1)/(e^2x + 1)
     '''
-    x = np.clip(x, -20, 20)
-    return (np.exp(2*x) - 1)/(np.exp(2*x) + 1)
+    return np.tanh(x)
 
 def relu(x):
     '''
         REctified Linear Unit function f(x) = max(0, x)
     '''
-    x = np.clip(x, -20, 20)
+    #x = np.clip(x, -20, 20)
     return np.maximum(x, 0)
 
 def softmax(x):
@@ -112,8 +111,8 @@ def tanh_derivative(x):
     '''
         First order derivative of the tanh function f'(x) = 1 - f^2(x)
     '''
-    x = np.clip(x, -20, 20)
-    return (1 - np.power(tanh(x), 2))
+    #x = np.clip(x, -300, 300)
+    return (1 - np.power(np.tanh(x), 2))
 
 def relu_derivative(x):
     '''

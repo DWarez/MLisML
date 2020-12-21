@@ -11,15 +11,14 @@ import plot as plt
 
 data = ds.MLCupDataset()
 
+my_model = NeuralNetwork()
+my_model.add(InputLayer(10, initializer="he"))
+my_model.add(DenseLayer(15, fanin = 10, activation="relu", initializer="he"))
+my_model.add(OutputLayer(2, fanin = 15, initializer="he"))
 
-k = 10
+my_model.compile(857, 100, 0.0015/1524, None, 0.001, 0.01, "mean_squared_error")
 
-for i in range(k):
-    (train, val) = data.kfolds(i)
-    my_model = NeuralNetwork()
-    my_model.add(InputLayer(10))
-    my_model.add(DenseLayer(15, fanin = 10, activation="sigmoid"))
-    my_model.add(OutputLayer(2, fanin = 15))
-    my_model.compile(857, 600, 0.1/1524, None, 0.001, 0.01, "mean_squared_error")
-    print("loss: {}".format(my_model.fit(train[0], train[1])[-1]))
-    print("evaluation: {}".format(my_model.evaluate(val[0], val[1])))
+loss = my_model.fit(data.train_data_patterns, data.train_data_targets)
+
+print(loss[-1])
+plt.plot_loss(loss)

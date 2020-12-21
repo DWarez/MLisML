@@ -222,7 +222,9 @@ class NeuralNetwork:
             Compute updates for output layer
         """
         gradients = loss_functions_derivatives[self.loss](outputs, targets.T)     # compute the gratients matrix (outputs - targets)
+        #gradients = np.clip(gradients, -20, 20)
         activation_derivatives = activation_functions_derivatives[self._model[-1].activation](self._model[-1]._net) # matrix of derivatives of the nets
+        #activation_derivatives = np.clip(activation_derivatives, -0.5, 0.5)
         self._model[-1]._deltas = np.multiply(gradients, activation_derivatives)    # compute deltas for the output layer
         biases = np.array(self._model[-1]._weights)[:, 0]       # save biases of layer
         self._model[-1]._weights = np.delete(self._model[-1]._weights, 0, 1)    # remove biases from weights matrix

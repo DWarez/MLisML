@@ -127,6 +127,8 @@ class InputLayer(Layer):
                 self._weights.append(np.random.randn(units + 1))
             elif initializer == "uniform":
                 self._weights.append(np.random.rand(units + 1))
+            elif initializer == "he":
+                self._weights.append(np.random.randn(units + 1) * np.sqrt(2/fanin))
             else:
                 raise ValueError("Initializer not found")
         
@@ -157,6 +159,8 @@ class OutputLayer(Layer):
                 self._weights.append(np.random.randn(fanin + 1))
             elif initializer == "uniform":
                 self._weights.append(np.random.rand(fanin + 1))
+            elif initializer == "he":
+                self._weights.append(np.random.randn(fanin + 1) * np.sqrt(2/fanin))
             else:
                 raise ValueError("Initializer not found")
         
@@ -187,6 +191,8 @@ class DenseLayer(Layer):
                 self._weights.append(np.random.randn(fanin + 1))
             elif initializer == "uniform":
                 self._weights.append(np.random.rand(fanin + 1))
+            elif initializer == "he":
+                self._weights.append(np.random.randn(fanin + 1) * np.sqrt(2/fanin))
             else:
                 raise ValueError("Initializer not found")
         

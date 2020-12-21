@@ -62,7 +62,7 @@ def uniform_init(x):
         :param x: narray from which the shape is taken
         :return: narray of the same shape of the parameter containing values from the uniform distribution
     '''
-    return np.random.rand(*(x.shape))
+    return np.random.rand(x)
 
 
 def normal_init(x):
@@ -71,7 +71,7 @@ def normal_init(x):
         :param x: narray from which the shape is taken
         :return: narray of the same shape of the parameter containing values from the normal distribution
     '''
-    return np.random.randn(*(x.shape))
+    return np.random.randn(x)
 
 
 def he_init(x, fanin_size):
