@@ -1,0 +1,5 @@
+##### MONKS #####
+    Monks1 - 100% accuracy: topology = one hidden layer with approximately 10 units using ReLU, lr = 0.08, regularization = 0.001, epochs = 700 (even less)
+    Monks2 - 100% accuracy: topology = one hidden layer with approximately 10 units using ReLU, lr = 0.05, regularization = 0.001, epochs = 700 (even less)
+    Monks3 - 96.7% accuracy: topology = one hidden layer with approximately 10 units using ReLU, lr = 0.08, regularization = 0.001, epochs = 700 (even less)
+#################
