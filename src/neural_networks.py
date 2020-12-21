@@ -222,7 +222,7 @@ class NeuralNetwork:
             Compute updates for output layer
         """
         gradients = loss_functions_derivatives[self.loss](outputs, targets.T)     # compute the gratients matrix (outputs - targets)
-        #gradients = np.clip(gradients, -20, 20)
+        #gradients = np.clip(gradients, -0.5, 0.5)
         activation_derivatives = activation_functions_derivatives[self._model[-1].activation](self._model[-1]._net) # matrix of derivatives of the nets
         #activation_derivatives = np.clip(activation_derivatives, -0.5, 0.5)
         self._model[-1]._deltas = np.multiply(gradients, activation_derivatives)    # compute deltas for the output layer
@@ -230,13 +230,13 @@ class NeuralNetwork:
         self._model[-1]._weights = np.delete(self._model[-1]._weights, 0, 1)    # remove biases from weights matrix
         """
             First save current weights in tmp.
-            Then compute weights update: W = W - ((DELTAS X FANIN.T) * lr + alpha * (W - Wold) - lambda * W).
+            Then compute weights update: W = W - ((DELTAS X FANIN.T) * lr + alpha * (W - Wold) - lambda * W)
             Then assign to Wold the value of tmp.
         """
         tmp = np.array(self._model[-1]._weights)
         self._model[-1]._weights = np.subtract(self._model[-1]._weights, np.subtract(np.add(np.dot(self._model[-1]._deltas, \
             np.transpose(self._model[-1]._fanin)) * self.learning_rate, self.momentum * np.subtract(self._model[-1]._weights, self._model[-1]._old_weights)), \
-                self.regularization * self._model[-1]._weights))
+                self.regularization * np.linalg.norm(np.square(self._model[-1]._weights))))
         self._model[-1]._old_weights = tmp
         self._model[-1]._weights = np.insert(self._model[-1]._weights, 0, biases, axis=1)   # add back the bias vector
 
@@ -250,13 +250,13 @@ class NeuralNetwork:
             self._model[l]._weights = np.delete(self._model[l]._weights, 0, 1)  # remove bias vector from weights
             """
                 First save current weights in tmp.
-                Then compute weights update: W = W - ((DELTAS X FANIN.T) * lr + alpha * (W - Wold)).
+                Then compute weights update: W = W - ((DELTAS X FANIN.T) * lr + alpha * (W - Wold) - lambda * W)
                 Then assign to Wold the value of tmp.
             """
             tmp = np.array(self._model[l]._weights)
             self._model[l]._weights = np.subtract(self._model[l]._weights, np.subtract(np.add(np.dot(self._model[l]._deltas, \
                 np.transpose(self._model[l]._fanin)) * self.learning_rate, self.momentum * np.subtract(self._model[l]._weights, self._model[l]._old_weights)), \
-                    self.regularization * self._model[l]._weights))
+                    self.regularization * np.linalg.norm(np.square(self._model[l]._weights))))
             self._model[l]._old_weights = tmp
             self._model[l]._weights = np.insert(self._model[l]._weights, 0, biases, axis=1) # add back the bias vector
 

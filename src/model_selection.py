@@ -33,9 +33,9 @@ for epoch in epochs:
                 for i in range(k):
                     model = NeuralNetwork()
                     model.add(InputLayer(10))
-                    model.add(DenseLayer(100, fanin = 10))
-                    model.add(DenseLayer(100, fanin = 100))
-                    model.add(OutputLayer(2, fanin = 100))
+                    model.add(DenseLayer(20, fanin = 10))
+                    model.add(DenseLayer(20, fanin = 20))
+                    model.add(OutputLayer(2, fanin = 20))
                     model.compile(size, epoch, lr/size, None, reg, alpha, "mean_squared_error")
                     (train, val) = data.kfolds(index=i, k=k)
                     mean_loss = mean_loss + model.fit(train[0], train[1])[-1]
