@@ -58,8 +58,7 @@ def relu(x):
     '''
         REctified Linear Unit function f(x) = max(0, x)
     '''
-    #x = np.clip(x, -20, 20)
-    return np.maximum(x, 0)
+    return np.clip(x, 0, 50)
 
 def softmax(x):
     '''
