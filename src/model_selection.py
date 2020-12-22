@@ -5,7 +5,7 @@ import os
 import progressbar
 
 DEFAULT_DIR = "/reports"
-DEFAULT_NAME = "/model_selection_sigmoid_2h(20x20).txt"
+DEFAULT_NAME = "/model_selection_sigmoid_1h_20.txt"
 
 
 data = MLCupDataset()
@@ -34,7 +34,6 @@ for epoch in epochs:
                     model = NeuralNetwork()
                     model.add(InputLayer(10))
                     model.add(DenseLayer(20, fanin = 10))
-                    model.add(DenseLayer(20, fanin = 20))
                     model.add(OutputLayer(2, fanin = 20))
                     model.compile(size, epoch, lr/size, None, reg, alpha, "mean_squared_error")
                     (train, val) = data.kfolds(index=i, k=k)
