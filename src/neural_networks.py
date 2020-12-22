@@ -236,7 +236,7 @@ class NeuralNetwork:
         tmp = np.array(self._model[-1]._weights)
         self._model[-1]._weights = np.subtract(self._model[-1]._weights, np.subtract(np.add(np.dot(self._model[-1]._deltas, \
             np.transpose(self._model[-1]._fanin)) * self.learning_rate, self.momentum * np.subtract(self._model[-1]._weights, self._model[-1]._old_weights)), \
-                self.regularization * np.linalg.norm(np.square(self._model[-1]._weights))))
+                self.regularization * self._model[-1]._weights))
         self._model[-1]._old_weights = tmp
         self._model[-1]._weights = np.insert(self._model[-1]._weights, 0, biases, axis=1)   # add back the bias vector
 
@@ -256,7 +256,7 @@ class NeuralNetwork:
             tmp = np.array(self._model[l]._weights)
             self._model[l]._weights = np.subtract(self._model[l]._weights, np.subtract(np.add(np.dot(self._model[l]._deltas, \
                 np.transpose(self._model[l]._fanin)) * self.learning_rate, self.momentum * np.subtract(self._model[l]._weights, self._model[l]._old_weights)), \
-                    self.regularization * np.linalg.norm(np.square(self._model[l]._weights))))
+                    self.regularization * self._model[l]._weights))
             self._model[l]._old_weights = tmp
             self._model[l]._weights = np.insert(self._model[l]._weights, 0, biases, axis=1) # add back the bias vector
 
@@ -289,7 +289,6 @@ class NeuralNetwork:
             
             if len(patterns) > (i + 1) * self.batch_size:
                 loss.append(self._backpropagation(patterns[(i + 1) * self.batch_size:], targets[(i + 1) * self.batch_size:]))
-
         return loss
 
 

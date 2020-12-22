@@ -5,14 +5,14 @@ import os
 import progressbar
 
 DEFAULT_DIR = "/reports"
-DEFAULT_NAME = "/model_selection_sigmoid_2h.txt"
+DEFAULT_NAME = "/model_selection_sigmoid_2h(20x20).txt"
 
 
 data = MLCupDataset()
 
 learning_rates = [0.08, 0.05, 0.03, 0.01, 0.008, 0.005, 0.003, 0.001]
 epochs = [300, 600]
-regularizations = [0.008, 0.005, 0.003, 0.001]
+regularizations = [0.00008, 0.00005, 0.00003, 0.00001]
 momentums = [0.8, 0.5, 0.3, 0.1, 0.08, 0.05, 0.03, 0.01]
 
 k = 10
