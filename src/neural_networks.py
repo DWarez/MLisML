@@ -214,7 +214,22 @@ class NeuralNetwork:
             Compute outputs for each pattern in the batch
         """
 
+        '''
+            Preprocessing used for managing Nesterov's momentum.
+            Save the real weights, compute weights tilde, compute gradient and then get back real weights
+        '''
+        real_weights = []
+        for i in range(len(self._model)):
+            real_weights.append(self._model[i]._weights)
+            biases = np.array(self._model[i]._weights)[:, 0]
+            self._model[i]._weights = np.delete(self._model[i]._weights, 0, 1)
+            self._model[i]._weights = np.add(self._model[i]._weights, np.subtract(self._model[i]._weights, self._model[i]._old_weights) * self.momentum)
+            self._model[i]._weights = np.insert(self._model[i]._weights, 0, biases, axis=1)
+
         outputs = self._feedforward(patterns)
+
+        for i in range(len(self._model)):
+            self._model[i]._weights = real_weights[i]
 
         loss = loss_functions[self.loss](outputs, targets.T)
 

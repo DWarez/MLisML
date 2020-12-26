@@ -1,0 +1,14 @@
+ABSTRACT
+--------
+\textit{Insert here few rows (up to 5) summarizing the developed project (\underline{used model} \underline{for the cup}, validation technique, novelties if any) \dots} 
+
+
+INTRODUCTION
+------------
+\textit{Describe/define \textit{your aim and the essential background} (in short):
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item[$\circ$] Define your aims: To explore/improve what? What are you going to show?
+    \item[$\circ$] Describe (just \underline{define}) the used models, the used algorithms  etc. 
+    \item[$\circ$] Describe your assumptions (if any significant).
+\end{itemize}}
