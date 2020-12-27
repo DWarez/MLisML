@@ -318,6 +318,29 @@ class NeuralNetwork:
         return loss_functions["mean_euclidean_error"](self._feedforward(patterns), targets.T)
 
     
+    def fit_monks(self, patterns, targets, test_patterns, test_targets):
+        test_loss = []
+        loss = []
+        accuracy = []
+        test_accuracy = []
+
+        i = 0
+
+        for _ in range(self.epochs):
+            for i in range(math.floor(len(patterns)/self.batch_size)):
+                loss.append(self._backpropagation(patterns[i * self.batch_size : (i + 1) * self.batch_size], targets[i * self.batch_size : (i + 1) * self.batch_size]))
+            
+            if len(patterns) > (i + 1) * self.batch_size:
+                loss.append(self._backpropagation(patterns[(i + 1) * self.batch_size:], targets[(i + 1) * self.batch_size:]))
+
+            test_loss.append(loss_functions["mean_squared_error"](self._feedforward(test_patterns), test_targets.T))
+
+            accuracy.append(self.evaluate_monks(patterns, targets))
+            test_accuracy.append(self.evaluate_monks(test_patterns, test_targets))
+
+        return (loss, test_loss, accuracy, test_accuracy)
+
+
     def evaluate_monks(self, patterns, targets):
         """
             Method used to evaluate the accuracy of the trained model on MONKS
@@ -328,8 +351,6 @@ class NeuralNetwork:
         positives = 0
         for i in range(len(patterns)):
             result = round(float(self._feedforward(patterns[i])))
-            print("result: {}".format(result))
-            print(targets[i])
             if  result == targets[i]:
                 positives += 1
         

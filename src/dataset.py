@@ -26,8 +26,8 @@ DEFAULT_DIR = "/Project Guidelines"
 DEFAULT_NAME = "/ML-CUP20-TR.csv"
 
 DEFAULT_DIR_MONK = "/src/monk"
-DEFAULT_NAME_MONK = "/monks-1.train"
-DEFAULT_TEST_MONK = "/monks-1.test"
+DEFAULT_NAME_MONK = "/monks-2.train"
+DEFAULT_TEST_MONK = "/monks-2.test"
 
 class Dataset:
     '''
