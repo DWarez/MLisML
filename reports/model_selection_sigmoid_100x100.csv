@@ -1,4 +1,4 @@
-Configuration - Epochs - Learning Rate - Regularization - Momentum - Loss (MSE) - Evaluation (MEE)
+Configuration, Epochs, Learning Rate, Regularization, Momentum, Loss (MSE), Evaluation (MEE)
 0, 300, 0.08, 8e-05, 0.8, 545233.8172557901, 730.8784635098764
 1, 300, 0.08, 8e-05, 0.5, 470490.393543264, 686.337533916228
 2, 300, 0.08, 8e-05, 0.3, 501469.9984963715, 590.7647125735606
