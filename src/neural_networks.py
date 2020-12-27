@@ -304,7 +304,13 @@ class NeuralNetwork:
             
             if len(patterns) > (i + 1) * self.batch_size:
                 loss.append(self._backpropagation(patterns[(i + 1) * self.batch_size:], targets[(i + 1) * self.batch_size:]))
-        return loss
+        
+        i = 0
+        l = []
+        while i < len(loss):
+            l.append((loss[i] + loss[i+1])/2)
+            i += 2
+        return l
 
 
     def evaluate(self, patterns, targets):

@@ -13,10 +13,11 @@ data = ds.MLCupDataset()
 
 my_model = NeuralNetwork()
 my_model.add(InputLayer(10))
-my_model.add(DenseLayer(20, fanin = 10, initializer="normal"))
-my_model.add(OutputLayer(2, fanin = 20))
+my_model.add(DenseLayer(50, fanin = 10))
+my_model.add(DenseLayer(30, fanin = 50))
+my_model.add(OutputLayer(2, fanin = 30))
 
-my_model.compile(857, 400, 0.0005/857, None, 0.00005, 0.01, "mean_squared_error")
+my_model.compile(1142, 600, 0.03/1142, None, 0.00003, 0.5, "mean_squared_error")
 
 loss = my_model.fit(data.train_data_patterns, data.train_data_targets)
 
