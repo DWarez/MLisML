@@ -12,15 +12,21 @@ import plot as plt
 data = ds.MLCupDataset()
 
 my_model = NeuralNetwork()
-my_model.add(InputLayer(10))
-my_model.add(DenseLayer(50, fanin = 10))
-my_model.add(DenseLayer(30, fanin = 50))
-my_model.add(OutputLayer(2, fanin = 30))
+my_model.add(InputLayer(10, initializer="he"))
+my_model.add(DenseLayer(50, fanin = 10, initializer="he"))
+my_model.add(DenseLayer(30, fanin = 50, initializer="he"))
+my_model.add(OutputLayer(2, fanin = 30, initializer="he"))
 
-my_model.compile(1142, 600, 0.03/1142, None, 0.00003, 0.5, "mean_squared_error")
+my_model.compile(857, 600, 0.03/857, None, 0.00003, 0.5, "mean_squared_error")
 
 loss = my_model.fit(data.train_data_patterns, data.train_data_targets)
 
-print(loss[-1])
+i = 0
+l = []
+while i < len(loss):
+    l.append((loss[i] + loss[i+1])/2)
+    i += 2
+
+print(l[-1])
 print("evaluation: {}".format(my_model.evaluate(data.model_assessment_patterns, data.model_assessment_targets)))
-plt.plot_loss(loss)
+plt.plot_loss(l)

@@ -305,12 +305,7 @@ class NeuralNetwork:
             if len(patterns) > (i + 1) * self.batch_size:
                 loss.append(self._backpropagation(patterns[(i + 1) * self.batch_size:], targets[(i + 1) * self.batch_size:]))
         
-        i = 0
-        l = []
-        while i < len(loss):
-            l.append((loss[i] + loss[i+1])/2)
-            i += 2
-        return l
+        return loss
 
 
     def evaluate(self, patterns, targets):
@@ -321,8 +316,26 @@ class NeuralNetwork:
             raise ValueError("The number of patterns and targets must be equal.")
 
         return loss_functions["mean_euclidean_error"](self._feedforward(patterns), targets.T)
+
     
+    def evaluate_monks(self, patterns, targets):
+        """
+            Method used to evaluate the accuracy of the trained model on MONKS
+        """
+        if len(patterns) != len(targets):
+            raise ValueError("The number of patterns and targets must be equal.")
+        
+        positives = 0
+        for i in range(len(patterns)):
+            result = round(float(self._feedforward(patterns[i])))
+            print("result: {}".format(result))
+            print(targets[i])
+            if  result == targets[i]:
+                positives += 1
+        
+        return positives/len(patterns) * 100
     
+
     def __str__(self):
         """
             Defining __str__ function for pretty print
