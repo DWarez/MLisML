@@ -42,3 +42,4 @@ Tables and plots have always a caption. All of the Figures and Tables should be 
 \caption{Do \textit{not} insert a picture of your network (unless innovative).}
 \label{fig:myfigure}
 \end{figure}
+
