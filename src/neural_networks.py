@@ -19,8 +19,7 @@
 
 import numpy as np
 import math
-import random
-import progressbar
+import os
 
 from functions._activation_functions import activation_functions, activation_functions_derivatives
 from functions._loss_functions import loss_functions, loss_functions_derivatives
@@ -318,6 +317,21 @@ class NeuralNetwork:
         return loss_functions["mean_euclidean_error"](self._feedforward(patterns), targets.T)
 
     
+    def _blind_test(self, patterns):
+        """
+            Method used to generate the output file of the results for the blind test
+        """
+        filepath = os.path.dirname(os.getcwd()) + "/Project Guidelines/ML-CUP20-Results.csv"
+        file = open(filepath, "w")
+        file.write("# Dario Salvati     Andrea Zuppolini\n# DeepMai\n# ML-CUP20\n# xx/yy/zz\n")
+        results = self._feedforward(patterns)
+        n = 1
+        for r in results.T:
+            file.write("{},{},{}\n".format(n, r[0], r[1]))
+            n += 1
+        
+
+
     def fit_monks(self, patterns, targets, test_patterns, test_targets):
         test_loss = []
         loss = []

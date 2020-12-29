@@ -23,7 +23,8 @@ import os
 import math
 
 DEFAULT_DIR = "/Project Guidelines"
-DEFAULT_NAME = "/ML-CUP20-TR.csv"
+DEFAULT_TRAIN_NAME = "/ML-CUP20-TR.csv"
+DEFAULT_TEST_NAME = "/ML-CUP20-TS.csv"
 
 DEFAULT_DIR_MONK = "/src/monk"
 DEFAULT_NAME_MONK = "/monks-3.train"
@@ -142,8 +143,8 @@ class MLCupDataset(Dataset):
     def __init__(self):
         self.train_data_patterns = self._get_training_patterns()
         self.train_data_targets = self._get_training_lables()
-        self.test_data_patterns = []
-        self.test_data_targets = []
+        self.test_data_patterns = self._get_testing_patterns()
+        self.test_data_patterns = np.array(self.test_data_patterns)
         self.model_assessment_patterns = []
         self.model_assessment_targets = []
         self._split()
@@ -151,10 +152,10 @@ class MLCupDataset(Dataset):
 
     def _get_training_patterns(self):
         '''
-            Method that returns the list of patterns
+            Method that returns the list of patterns for training
         '''
         patterns = []
-        filepath = os.path.dirname(os.getcwd()) + DEFAULT_DIR + DEFAULT_NAME
+        filepath = os.path.dirname(os.getcwd()) + DEFAULT_DIR + DEFAULT_TRAIN_NAME
         with open(filepath, "r") as trfile:
             reader = csv.reader(trfile)
             for _ in range(7):
@@ -166,10 +167,10 @@ class MLCupDataset(Dataset):
 
     def _get_training_lables(self):
         '''
-            Method that returns the list of patterns
+            Method that returns the list of targets for training
         '''
         lables = []
-        filepath = os.path.dirname(os.getcwd()) + DEFAULT_DIR + DEFAULT_NAME
+        filepath = os.path.dirname(os.getcwd()) + DEFAULT_DIR + DEFAULT_TRAIN_NAME
         with open(filepath, "r") as trfile:
             reader = csv.reader(trfile)
             for _ in range(7):
@@ -178,6 +179,20 @@ class MLCupDataset(Dataset):
                 lables.append(np.array([float(i) for i in row[11:]]))
         return lables
 
+
+    def _get_testing_patterns(self):
+        '''
+            Method that returns the list of patterns for the blind test set
+        '''
+        patterns = []
+        filepath = os.path.dirname(os.getcwd()) + DEFAULT_DIR + DEFAULT_TEST_NAME
+        with open(filepath, "r") as trfile:
+            reader = csv.reader(trfile)
+            for _ in range(7):
+                next(reader)
+            for row in reader:
+                patterns.append(np.array([float(i) for i in row[1:]]))
+        return patterns
 
 class MonksDataset(Dataset):
     '''

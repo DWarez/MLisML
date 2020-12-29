@@ -3,13 +3,8 @@ import numpy as np
 import dataset as ds
 from neural_networks import NeuralNetwork
 from layers import InputLayer, OutputLayer, DenseLayer
-from functions._init_functions import init_functions
-from functions._activation_functions import activation_functions, activation_functions_derivatives
-from functions._loss_functions import loss_functions
-import plot as plt
+import matplotlib.pyplot as plt
 
-
-data = ds.MLCupDataset()
 
 data = ds.MLCupDataset()
 
@@ -31,4 +26,8 @@ while i < len(loss):
     i += 2
 
 print(final_loss[-1])
+print(model.evaluate(data.model_assessment_patterns, data.model_assessment_targets))
+plt.plot(final_loss)
+plt.show()
+
 model._blind_test(data.test_data_patterns)
