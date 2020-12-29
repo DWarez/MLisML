@@ -1,3 +1,4 @@
-MONKS 1: 100% accuracy,
-
+MONKS1: 100% accuracy, lr = 
+MONKS2: 
+MONKS3 no Regularization: 94%, lr = 8/122
 MONKS3 with Regularization: 96%, lr = 8/122, reg = 0.001
