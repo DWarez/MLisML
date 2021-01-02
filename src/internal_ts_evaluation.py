@@ -15,14 +15,14 @@ data = ds.MLCupDataset()
 
 model = NeuralNetwork()
 model.add(InputLayer(10))
-model.add(DenseLayer(50, fanin=10, activation="sigmoid"))
-model.add(DenseLayer(30, fanin=50, activation="sigmoid"))
-model.add(OutputLayer(2, fanin=30))
+model.add(DenseLayer(20, fanin=10, activation="sigmoid"))
+model.add(OutputLayer(2, fanin=20))
 
-# configuration 322, line 324
-model.compile(1143, 600, 0.03, None, 0.000008, 0.3, "mean_squared_error")
+
+model.compile(1143, 600, 0.01, None, 0.000008, 0.08, "mean_squared_error")
 
 loss = model.fit(data.train_data_patterns, data.train_data_targets)
-
 print(loss[-1])
-plt.plot_loss(loss)
+
+ts_evaluation = model.evaluate(data.model_assessment_patterns, data.model_assessment_targets)
+print(ts_evaluation)

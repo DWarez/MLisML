@@ -217,6 +217,7 @@ class NeuralNetwork:
             Preprocessing used for managing Nesterov's momentum.
             Save the real weights, compute weights tilde, compute gradient and then get back real weights
         '''
+        size = len(patterns)
         real_weights = []
         for i in range(len(self._model)):
             real_weights.append(self._model[i]._weights)
@@ -249,7 +250,7 @@ class NeuralNetwork:
         """
         tmp = np.array(self._model[-1]._weights)
         self._model[-1]._weights = np.subtract(self._model[-1]._weights, np.subtract(np.add(np.dot(self._model[-1]._deltas, \
-            np.transpose(self._model[-1]._fanin)) * self.learning_rate, self.momentum * np.subtract(self._model[-1]._weights, self._model[-1]._old_weights)), \
+            np.transpose(self._model[-1]._fanin)) * self.learning_rate/size, self.momentum * np.subtract(self._model[-1]._weights, self._model[-1]._old_weights)), \
                 self.regularization * self._model[-1]._weights))
         self._model[-1]._old_weights = tmp
         self._model[-1]._weights = np.insert(self._model[-1]._weights, 0, biases, axis=1)   # add back the bias vector
@@ -269,7 +270,7 @@ class NeuralNetwork:
             """
             tmp = np.array(self._model[l]._weights)
             self._model[l]._weights = np.subtract(self._model[l]._weights, np.subtract(np.add(np.dot(self._model[l]._deltas, \
-                np.transpose(self._model[l]._fanin)) * self.learning_rate, self.momentum * np.subtract(self._model[l]._weights, self._model[l]._old_weights)), \
+                np.transpose(self._model[l]._fanin)) * self.learning_rate/size, self.momentum * np.subtract(self._model[l]._weights, self._model[l]._old_weights)), \
                     self.regularization * self._model[l]._weights))
             self._model[l]._old_weights = tmp
             self._model[l]._weights = np.insert(self._model[l]._weights, 0, biases, axis=1) # add back the bias vector
