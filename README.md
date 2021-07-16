@@ -7,7 +7,7 @@ This repository is exclusively used for the realization of the project for the M
 Just like Keras, but a lot uglier.
 
 Example:
-```
+```python3
 from neural_networks import NeuralNetwork
 from layers import InputLayer, DenseLayer, OutputLayer
 from dataset import MLCupDataset
